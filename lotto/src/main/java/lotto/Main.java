@@ -1,15 +1,22 @@
 package lotto;
 
+import java.util.List;
+
 import lotto.simple.SimpleLottoService;
 
 public class Main {
 
 	public static void main(String[] args) {
+		Loader loader = new OzLottoLoader();
+		List<int[]> seeds = loader.load();
+		System.out.println("Load seeds finished! " + seeds.size());
 		LottoService service = new SimpleLottoService();
 		service.init();
-		service.add(new int[] { 21, 35, 40, 20, 14, 5, 8 });
-		service.add(new int[] { 16, 44, 2, 17, 1, 32, 34 });
+		System.out.println("Init successfully");
+		for (int i = 0; i < seeds.size(); i++) {
+			service.add(seeds.get(i));
+			System.out.println(i + " Add successfully");
+		}
 		System.out.println(service.getCandidates(10).size());
 	}
-
 }

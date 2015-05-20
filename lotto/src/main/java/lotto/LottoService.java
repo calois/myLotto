@@ -7,5 +7,5 @@ public interface LottoService {
 
 	public void add(int[] num);
 
-	public List<int[]> getCandidates(int limit);
+	public List<Select> getCandidates(int limit);
 }

@@ -1,5 +1,9 @@
 package lotto;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +40,33 @@ public class Utils {
 		return result;
 	}
 
+	public static String httpGet(String uri) {
+		StringBuilder s = new StringBuilder();
+		try {
+			URL yahoo = new URL(uri);
+			HttpURLConnection yc = (HttpURLConnection) yahoo.openConnection();
+			yc.setRequestMethod("GET");
+			yc.setRequestProperty("Accept",
+					"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+			yc.setRequestProperty(
+					"User-Agent",
+					"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36");
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					yc.getInputStream()));
+			String inputLine;
+			while ((inputLine = in.readLine()) != null) {
+				s.append(inputLine);
+			}
+			in.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return s.toString();
+	}
+
 	public static void main(String[] args) {
-		List<int[]> result = getCombination(45, 4);
-		System.out.println(result.size());
+		System.out
+				.println(Utils
+						.httpGet("http://www.ozlotteries.com/lotto-results?lottery_id=8&page=1"));
 	}
 }
