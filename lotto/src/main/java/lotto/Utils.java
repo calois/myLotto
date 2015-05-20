@@ -75,7 +75,7 @@ public class Utils {
 			while (null != (line = br.readLine())) {
 				String[] temp = line.split(",");
 				int[] num = new int[temp.length - 1];
-				for (int i = 0; i < num.length - 1; i++) {
+				for (int i = 0; i < num.length; i++) {
 					num[i] = Integer.valueOf(temp[i]);
 				}
 				int score = Integer.valueOf(temp[temp.length - 1]);
