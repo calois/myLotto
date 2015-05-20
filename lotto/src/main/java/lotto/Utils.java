@@ -1,6 +1,10 @@
 package lotto;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -62,6 +66,71 @@ public class Utils {
 			e.printStackTrace();
 		}
 		return s.toString();
+	}
+
+	public static List<Select> readSelect(String file) throws Exception {
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			List<Select> result = new ArrayList<>();
+			String line;
+			while (null != (line = br.readLine())) {
+				String[] temp = line.split(",");
+				int[] num = new int[temp.length - 1];
+				for (int i = 0; i < num.length - 1; i++) {
+					num[i] = Integer.valueOf(temp[i]);
+				}
+				int score = Integer.valueOf(temp[temp.length - 1]);
+				Select s = new Select(num, score);
+				result.add(s);
+			}
+			return result;
+		}
+	}
+
+	public static void writeSelect(String file, List<Select> selects)
+			throws Exception {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+				file)))) {
+			for (int i = 0; i < selects.size(); i++) {
+				if (i != 0) {
+					bw.newLine();
+				}
+				bw.append(selects.get(i).toString());
+			}
+		}
+	}
+
+	public static List<int[]> readNumber(String file) throws Exception {
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			List<int[]> result = new ArrayList<>();
+			String line;
+			while (null != (line = br.readLine())) {
+				String[] temp = line.split(",");
+				int[] num = new int[temp.length];
+				for (int i = 0; i < num.length; i++) {
+					num[i] = Integer.valueOf(temp[i]);
+				}
+				result.add(num);
+			}
+			return result;
+		}
+	}
+
+	public static void writeNumber(String file, List<int[]> numbers)
+			throws Exception {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+				file)))) {
+			for (int i = 0; i < numbers.size(); i++) {
+				if (i != 0) {
+					bw.newLine();
+				}
+				for (int j = 0; j < numbers.get(i).length; j++) {
+					if (j != 0) {
+						bw.append(",");
+					}
+					bw.append(String.valueOf(numbers.get(i)[j]));
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) {

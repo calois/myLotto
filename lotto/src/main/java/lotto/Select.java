@@ -3,6 +3,10 @@ package lotto;
 import java.util.Arrays;
 
 public class Select {
+	public int[] getNum() {
+		return num;
+	}
+
 	private int[] num;
 	private int score;
 
@@ -13,6 +17,11 @@ public class Select {
 	public Select(int[] num) {
 		this.num = num;
 		score = 0;
+	}
+
+	public Select(int[] num, int score) {
+		this.num = num;
+		this.score = score;
 	}
 
 	public boolean check(int[] n) {
@@ -35,7 +44,7 @@ public class Select {
 				s.append(n);
 			}
 		}
-		s.append("(" + score + ")");
+		s.append("," + score);
 		return s.toString();
 	}
 }
