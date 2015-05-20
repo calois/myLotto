@@ -88,9 +88,17 @@ public class SimpleLottoService implements LottoService {
 					return o2.getScore() - o1.getScore();
 				}
 			});
-			result = result.stream().limit(i * i).collect(Collectors.toList());
+			if (i == 4) {
+				result = result.stream().filter(rr -> rr.getScore() == 0)
+						.collect(Collectors.toList());
+			} else if (i != 1) {
+				result = result.stream().limit(i * i * i * i * i)
+						.collect(Collectors.toList());
+			}
+			if (i == 2) {
+				break;
+			}
 		}
 		return result;
 	}
-
 }

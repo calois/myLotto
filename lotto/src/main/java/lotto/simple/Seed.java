@@ -20,7 +20,7 @@ public class Seed {
 		public int compare(Select o1, Select o2) {
 			int[] num1 = o1.getNum();
 			int[] num2 = o2.getNum();
-			for (int i = 0; i < num1.length - 1; i++) {
+			for (int i = 0; i < num1.length; i++) {
 				if (num1[i] < num2[i]) {
 					return -1;
 				} else if (num1[i] > num2[i]) {
@@ -71,14 +71,14 @@ public class Seed {
 		dirty = false;
 	}
 
-	public void check(Select select) {
+	public void check(final Select select) {
 		select.setScore(0);
 		Utils.getCombination(select.getNum(), n).forEach(
 				it -> {
 					int index = Collections.binarySearch(sequenceList,
 							new Select(it), C);
 					select.setScore(select.getScore()
-							- sequenceList.get(index).getScore());
+							+ sequenceList.get(index).getScore());
 				});
 	}
 }
