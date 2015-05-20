@@ -9,5 +9,5 @@ public interface LottoService {
 
 	public void work() throws Exception;
 
-	public List<Select> getCandidates(int limit);
+	public List<Select> getCandidates(int[] pickNumber);
 }

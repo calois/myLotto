@@ -99,7 +99,7 @@ public class Utils {
 		}
 	}
 
-	public static List<int[]> readNumber(String file) throws Exception {
+	public static List<int[]> readNumbers(String file) throws Exception {
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			List<int[]> result = new ArrayList<>();
 			String line;
@@ -115,7 +115,7 @@ public class Utils {
 		}
 	}
 
-	public static void writeNumber(String file, List<int[]> numbers)
+	public static void writeNumbers(String file, List<int[]> numbers)
 			throws Exception {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
 				file)))) {

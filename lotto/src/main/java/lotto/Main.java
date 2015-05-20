@@ -17,6 +17,11 @@ public class Main {
 			service.add(seeds.get(i));
 		}
 		service.work();
-		System.out.println(service.getCandidates(10).size());
+		List<Select> result = service.getCandidates(new int[] { 10, 9, 11, 32,
+				22, 24, 36, 37, 21, 12, 39, 43, 5, 7 });
+		System.out.println(result.size());
+		result.forEach(it -> {
+			it.print();
+		});
 	}
 }
